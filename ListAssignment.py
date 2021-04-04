@@ -1,4 +1,0 @@
-myUniqueList = []
-
-def list():
-    
