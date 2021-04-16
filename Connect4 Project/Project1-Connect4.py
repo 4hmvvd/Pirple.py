@@ -2,9 +2,10 @@
 Project #1: A Simple Game: CONNECT 4
 """
 
+import sys
 from termcolor import colored, cprint
 
-Fields = [[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "]]
+Fields = [[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "]]
 
 def drawField(Fields):
     for row in range(13):
@@ -57,7 +58,7 @@ def checkIfFourInRow():
             else:
                 counter = 0
             if counter == 3:
-                winner column[i - 1]
+                winner = column[i - 1]
                 return winner
     return winner
 
@@ -72,7 +73,7 @@ def checkIfFourInColumn(columnMatrix):
             else:
                 counter = 0
             if counter == 3:
-                winner column[i - 1]
+                winner = column[i - 1]
                 return winner
     return winner
 
@@ -80,7 +81,7 @@ def checkIfFourInForwardDiagonal(columnMatrix, player):
     for i in range(0, len(columnMatrix)):
         for j in range(0, len(columnMatrix[i])):
             try:
-                if columnMatrix[i][j] == player and columnMatrix[i + 1][j - 1] == player and column:
+                if columnMatrix[i][j] == player and columnMatrix[i + 1][j - 1] == player and columnMatrix[i + 2][j - 2] == player and columnMatrix[i + 3][j - 3] == player:
                     return True
             except IndexError:
                 next
@@ -91,7 +92,7 @@ def checkIfFourInBackwardDiagonal(columnMatrix, player):
     for i in range(0, len(columnMatrix)):
         for j in range(0, len(columnMatrix[i])):
             try:
-                if columnMatrix[i][j] == player and columnMatrix[i + 1][j + 1] == player and column:
+                if columnMatrix[i][j] == player and columnMatrix[i + 1][j + 1] == player and columnMatrix[i + 2][j + 2] == player and columnMatrix[i + 3][j + 3] == player:
                     return True
             except IndexError:
                 next
@@ -105,7 +106,7 @@ def IsValidMove(columnNo):
         return False
 
 def createColumnMatrix():
-    columnMatrix = [[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "]]
+    columnMatrix = [[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "],[" "," "," "," "," "," "," "]]
     for i in range(7):
         for j in range(len(Fields[i])):
             columnMatrix[j][i] = Fields[i][j]
@@ -144,8 +145,8 @@ def BeginConnect4():
                         elif checkIfFourInForwardDiagonal(columnMatrix, tile):
                             winner = currentPlayer
                             NoWin = False
-                    else:
-                        cprint('This is a wrong move. Try again.\n', 'red', attrs=['bold'])
+                else:
+                    cprint('This is a wrong move. Try again.\n', 'red', attrs=['bold'])
         else:
             cprint('This is a wrong move. Try again.\n', 'red', attrs=['bold'])
 
